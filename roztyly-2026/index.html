@@ -8,8 +8,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bree+Serif&family=Inter:wght@500;700;800&display=swap" rel="stylesheet">
 <style>
-  :root { --page: #d9d6c8; }
+  :root { --page: #0b2450; }
   html, body { margin: 0; background: var(--page); }
+  /* background: same as homepage – navy base, lighter wave, purple glow, basket watermark */
+  .bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+  .bg svg.wave { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .bg .kos { position: absolute; top: -2vh; right: -14vw; height: 104vh; width: auto; min-height: 640px; }
+  @media (max-width: 640px) { .bg .kos { right: -55vw; height: 80vh; min-height: 0; top: 4vh; opacity: .9; } }
+  .topbar, svg.map { position: relative; z-index: 1; }
   body { display: flex; justify-content: center; align-items: flex-start; padding: 24px 16px; box-sizing: border-box; min-height: 100vh; }
   svg.map { width: 100%; max-width: 1300px; height: auto; display: block; }
   .title { font-family: 'Bebas Neue', 'Oswald', sans-serif; font-size: 92px; fill: #0b242b; letter-spacing: 1px; }
@@ -64,13 +70,40 @@
   body { flex-direction: column; align-items: center; }
   .topbar { width: 100%; max-width: 1300px; margin: 0 0 14px; }
   .back { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px 10px 14px; border-radius: 999px;
-          background: #0c2350; color: #fff; text-decoration: none; font: 700 15px Inter, Arial, sans-serif;
-          box-shadow: 0 4px 14px rgba(12, 35, 80, .25); transition: transform .15s, background .15s; }
-  .back:hover { background: #163572; transform: translateX(-2px); }
+          background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.14); color: #fff; text-decoration: none;
+          font: 700 15px Inter, Arial, sans-serif; -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+          box-shadow: 0 4px 14px rgba(4, 12, 32, .35); transition: transform .15s, background .15s; }
+  .back:hover { background: rgba(255,255,255,.18); transform: translateX(-2px); }
   .back svg { width: 18px; height: 18px; }
 </style>
 </head>
 <body>
+<div class="bg" aria-hidden="true">
+  <svg class="wave" viewBox="0 0 2000 1125" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <linearGradient id="g-wave" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#0a285c"/>
+        <stop offset=".45" stop-color="#1c2a66"/>
+        <stop offset="1" stop-color="#3b3176"/>
+      </linearGradient>
+      <linearGradient id="g-base" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#0b2450"/>
+        <stop offset=".55" stop-color="#0f2553"/>
+        <stop offset="1" stop-color="#2a2c62"/>
+      </linearGradient>
+      <radialGradient id="g-glow" cx=".55" cy="1.02" r=".55">
+        <stop offset="0" stop-color="#6b3a8e" stop-opacity=".95"/>
+        <stop offset=".55" stop-color="#4a3480" stop-opacity=".45"/>
+        <stop offset="1" stop-color="#3b3176" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <rect width="2000" height="1125" fill="url(#g-base)"/>
+    <path d="M1010 0 C1060 160 1110 330 1085 440 C1060 560 990 630 820 700 C640 770 470 790 470 900
+             C470 1010 560 1080 640 1125 L2000 1125 L2000 0 Z" fill="url(#g-wave)"/>
+    <rect width="2000" height="1125" fill="url(#g-glow)"/>
+  </svg>
+  <img class="kos" src="../assets/kos-watermark.svg" alt="">
+</div>
 <nav class="topbar"><a class="back" href="../"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Všechny mapy</a></nav>
 <svg class="map" viewBox="0 0 1300 1080" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="Mapa hřiště PDGL #6 - ROZTYLY">
 <defs>
